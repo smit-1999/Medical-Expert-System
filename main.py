@@ -1,5 +1,7 @@
 from experta import *
 
+
+
 class MedicalExpert(KnowledgeEngine):
     username = "", 
     chest_pain = "",
@@ -8,7 +10,7 @@ class MedicalExpert(KnowledgeEngine):
     def needed_data(self):
         """ 
         This is a method which is called everytime engine.reset() is called.
-        It acts like a constructor to this class
+        It acts like a constructor to this class.
         """        
         yield Fact(findDisease = 'true')
         print("Hi! I am Mr.Expert.You can get yourself diagnosed here free of cost!I will ask you 10 questions")
@@ -46,7 +48,16 @@ class MedicalExpert(KnowledgeEngine):
         fainting = input("\nDo you faint occasionally?\nPlease type Yes/No\n")
         self.declare(Fact(fainting = fainting.strip().lower()))
 
+    @Rule(Fact(findDisease='true'), Fact(severe_chestPain = 'yes'), Fact(cough='no'))
+    def disease_0(self):
+        self.declare(Fact(disease = 'covid'))
 
+    @Rule(Fact(findDisease = 'true'),Fact(disease = MATCH.disease),salience = -1)
+    def getDisease(self, disease):
+        print('The most probable illness you are suffering from is:',disease)
+        print('\n\n')
+        print('Some info about the disease : ')
+        
     # @Rule(Fact(findDisease = 'true'),
     # Fact(name=MATCH.name))
     # def greet(self, name):
@@ -54,7 +65,7 @@ class MedicalExpert(KnowledgeEngine):
 if __name__ == "__main__": 
     
 
-    
+
     engine = MedicalExpert()
     engine.reset()
     engine.run()
