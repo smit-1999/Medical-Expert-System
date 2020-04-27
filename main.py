@@ -1,16 +1,9 @@
 from experta import *
-
+import ast
 
 
 class MedicalExpert(KnowledgeEngine):
     username = "", 
-    chest_pain = "",severe_chest_pain="",
-    cough="",severe_cough="",
-    fainting="",fatigue="",
-
-
-
-
 
 
     @DefFacts()
@@ -102,26 +95,140 @@ class MedicalExpert(KnowledgeEngine):
         self.declare(Fact(restlessness = self.restlessness.strip().lower()))
 
 
-    @Rule(Fact(findDisease='true'), Fact(chestPain = 'yes'), Fact(cough='no'))
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'yes'), Fact(fainting = 'no'),Fact(fatigue = 'no'),
+    Fact(headche = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'yes'),Fact(sore_throat='no'),
+    Fact(restlessness = 'no'))
     def disease_0(self):
         self.declare(Fact(disease = 'Covid'))
 
-    @Rule(Fact(findDisease='true'),salience = 1)
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'yes'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'yes'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'no'),Fact(sore_throat='no'),
+    Fact(restlessness = 'no'))
+    def disease_1(self):
+        self.declare(Fact(disease = 'Alzheimers'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'yes'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'yes'),Fact(fever = 'no'),Fact(sore_throat='no'),
+    Fact(restlessness = 'no'))
+    def disease_2(self):
+        self.declare(Fact(disease = 'Asthma'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'yes'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'no'),Fact(sore_throat='no'),
+    Fact(restlessness = 'yes'))
+    def disease_3(self):
+        self.declare(Fact(disease = 'Diabetes'))
+
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'no'),
+    Fact(headache = 'yes'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'yes'),Fact(fever = 'no'),Fact(sore_throat='no'),
+    Fact(restlessness = 'no'))
+    def disease_4(self):
+        self.declare(Fact(disease = 'Epilepsy'))
+
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'no'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'yes'),Fact(fever = 'yes'),Fact(sore_throat='yes'),
+    Fact(restlessness = 'no'))
+    def disease_5(self):
+        self.declare(Fact(disease = 'Glaucoma'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'yes'),Fact(fatigue = 'no'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'no'),Fact(sore_throat='no'),
+    Fact(restlessness = 'no'))
+    def disease_6(self):
+        self.declare(Fact(disease = 'Heart Disease'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'yes'),Fact(fatigue = 'no'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'yes'),Fact(sore_throat='no'),
+    Fact(restlessness = 'no'))
+    def disease_7(self):
+        self.declare(Fact(disease = 'Heat Stroke'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'no'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'yes'),Fact(fever = 'no'),Fact(sore_throat='no'),
+    Fact(restlessness = 'yes'))
+    def disease_8(self):
+        self.declare(Fact(disease = 'Hyperthyroidism'))
+    
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'yes'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'yes'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'no'),Fact(sore_throat='yes'),
+    Fact(restlessness = 'no'))
+    def disease_9(self):
+        self.declare(Fact(disease = 'Hypothermia'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'yes'), Fact(fainting = 'no'),Fact(fatigue = 'no'),
+    Fact(headache = 'yes'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'yes'),Fact(sore_throat='no'),
+    Fact(restlessness = 'no'))
+    def disease_10(self):
+        self.declare(Fact(disease = 'Jaundice'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'no'),
+    Fact(headache = 'yes'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'no'),Fact(fever = 'yes'),Fact(sore_throat='yes'),
+    Fact(restlessness = 'no'))
+    def disease_11(self):
+        self.declare(Fact(disease = 'Sinusitis'))
+
+    @Rule(Fact(findDisease='true'),Fact(chestPain = 'no'), Fact(cough = 'no'), Fact(fainting = 'no'),Fact(fatigue = 'yes'),
+    Fact(headache = 'no'),Fact(back_pain = 'no'),Fact(sunken_eyes = 'yes'),Fact(fever = 'yes'),Fact(sore_throat='no'),
+    Fact(restlessness = 'yes'))
+    def disease_12(self):
+        self.declare(Fact(disease = 'Tuberculosis'))
+
+
+    @Rule(Fact(findDisease='true'),NOT (Fact(disease = W())),salience = -1)
     def unmatched(self):
         self.declare(Fact(disease = 'unknown'))
 
-    @Rule(Fact(findDisease = 'true'),Fact(disease = MATCH.disease),salience = -1)
+    @Rule(Fact(findDisease = 'true'),Fact(disease = MATCH.disease),salience = 1)
     def getDisease(self, disease):
         
         if(disease == 'unknown'):
-            print(self.back_pain)
+            mapDisease = []
+            mapDisease.append('back_pain')
+            mapDisease.append('chest_pain')
+            mapDisease.append('cough')
+            mapDisease.append('fainting')
+            mapDisease.append('fatigue')
+            mapDisease.append('fever')
+            mapDisease.append('headache')
+            mapDisease.append('sore_throat')
+            mapDisease.append('restlessness')
+            mapDisease.append('sunken_eyes') 
+            mapDisease_val=[self.back_pain,self.chest_pain,self.cough,self.fainting,self.fatigue
+            ,self.fever,self.headache,self.sore_throat,self.restlessness,self.sunken_eyes]
+            
             print('We are unable to tell you the exact disease with confidence.But we believe that')
-
+            file = open("disease_symptoms.txt", "r")
+            contents = file.read()
+            dictionary = ast.literal_eval(contents)
+            file.close()
+            
+            yes_symptoms = []
+            for i in range(0,len(mapDisease_val)):
+                if mapDisease_val[i] == 'yes':
+                    yes_symptoms.append(mapDisease[i])
+            max_val = -1
+        
+            for key in dictionary.keys():
+                val = dictionary[key].split(",")
+                count = 0
+                for x in val:
+                    if x in yes_symptoms:
+                        count+=1
+                if count > max_val:
+                    max_val = count
+                    pred_dis = key
+            
+            if max_val == -1:
+                print("No diseases found.You are healthy!")
+            else:
+                print(pred_dis)
         else:
             print('The most probable illness you are suffering from is:',disease)
             print('\n\n')
             print('Some info about the disease:\n')
-            
+            print(disease)
             f = open("disease/disease_descriptions/" + disease + ".txt", "r")
             print(f.read())
 

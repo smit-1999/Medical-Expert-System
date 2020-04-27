@@ -21,6 +21,7 @@ for key in dictionary.keys():
     u = key
     val = dictionary[key]
     val = val.split(",")
+
     for v in val:
         G.add_edge(u,v)
 
