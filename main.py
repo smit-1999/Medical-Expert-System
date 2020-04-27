@@ -4,7 +4,14 @@ from experta import *
 
 class MedicalExpert(KnowledgeEngine):
     username = "", 
-    chest_pain = "",
+    chest_pain = "",severe_chest_pain="",
+    cough="",severe_cough="",
+    fainting="",fatigue="",
+
+
+
+
+
 
     @DefFacts()
     def needed_data(self):
@@ -23,81 +30,104 @@ class MedicalExpert(KnowledgeEngine):
 
     @Rule(Fact(findDisease='true'), NOT (Fact(chestPain = W())),salience = 995)
     def hasChestPain(self):
-        chest_pain = input("\nDo you have chest pain?\nPlease type Yes/No\n")
-        self.declare(Fact(chestPain = chest_pain.strip().lower()))
+        self.chest_pain = input("\nDo you have chest pain?\nPlease type Yes/No\n")
+        self.declare(Fact(chestPain = self.chest_pain.strip().lower()))
 
-    @Rule(Fact(findDisease='true'), (Fact(chestPain = 'yes')),salience = 990)
-    def hasSevereChestPain(self):
-        severe_chest_pain = input("\nIs it too severe?\nPlease type Yes/No\n")
-        self.declare(Fact(severe_chestPain = severe_chest_pain.strip().lower()))
+    # @Rule(Fact(findDisease='true'), (Fact(chestPain = 'yes')),salience = 990)
+    # def hasSevereChestPain(self):
+    #     self.severe_chest_pain = input("\nIs it too severe?\nPlease type Yes/No\n")
+    #     self.declare(Fact(severe_chestPain = self.severe_chest_pain.strip().lower()))
     
     @Rule(Fact(findDisease='true'), NOT (Fact(cough = W())),salience = 985)
     def hasCough(self):
-        cough = input("\nDo you have cough?\nPlease type Yes/No\n")
-        self.declare(Fact(cough = cough.strip().lower()))
+        self.cough = input("\nDo you have cough?\nPlease type Yes/No\n")
+        self.declare(Fact(cough = self.cough.strip().lower()))
 
     
-    @Rule(Fact(findDisease='true'), (Fact(cough = 'yes')),salience = 980)
-    def hasSevereCough(self):
-        severe_cough = input("\nDo you have severe cough?\nPlease type Yes/No\n")
-        self.declare(Fact(severe_chestPain = severe_cough.strip().lower()))
+    # @Rule(Fact(findDisease='true'), (Fact(cough = 'yes')),salience = 980)
+    # def hasSevereCough(self):
+    #     self.severe_cough = input("\nDo you have severe cough?\nPlease type Yes/No\n")
+    #     self.declare(Fact(severe_chestPain = self.severe_cough.strip().lower()))
 
 
     @Rule(Fact(findDisease='true'), NOT (Fact(fainting = W())),salience = 975)
     def hasFainting(self):
-        fainting = input("\nDo you faint occasionally?\nPlease type Yes/No\n")
-        self.declare(Fact(fainting = fainting.strip().lower()))
+        self.fainting = input("\nDo you faint occasionally?\nPlease type Yes/No\n")
+        self.declare(Fact(fainting = self.fainting.strip().lower()))
 
 
    
-#  sunken eyes, low body temperature,
-# restlessness, sore throat, fever
+#, low body temperature,
+# restlessness, 
 
     @Rule(Fact(findDisease='true'), NOT (Fact(fatigue = W())),salience = 970)
     def hasFatigue(self):
-        fatigue = input("\nDo you experience fatigue occasionally?\nPlease type Yes/No\n")
-        self.declare(Fact(fatigue = fatigue.strip().lower()))
+        self.fatigue = input("\nDo you experience fatigue occasionally?\nPlease type Yes/No\n")
+        self.declare(Fact(fatigue = self.fatigue.strip().lower()))
 
     @Rule(Fact(findDisease='true'), NOT (Fact(headache = W())),salience = 965)
     def hasHeadache(self):
-        headache = input("\nDo you experience headaches?\nPlease type Yes/No\n")
-        self.declare(Fact(headache = headache.strip().lower()))
+        self.headache = input("\nDo you experience headaches?\nPlease type Yes/No\n")
+        self.declare(Fact(headache = self.headache.strip().lower()))
     
-    @Rule(Fact(findDisease='true'), (Fact(headache = 'yes')),salience = 960)
-    def hasSevereheadache(self):
-        severe_headache = input("\nIs it too severe?\nPlease type Yes/No\n")
-        self.declare(Fact(severe_headache = severe_headache.strip().lower()))
+    # @Rule(Fact(findDisease='true'), (Fact(headache = 'yes')),salience = 960)
+    # def hasSevereheadache(self):
+    #     self.severe_headache = input("\nIs it too severe?\nPlease type Yes/No\n")
+    #     self.declare(Fact(severe_headache = self.severe_headache.strip().lower()))
 
     @Rule(Fact(findDisease='true'), NOT (Fact(back_pain = W())),salience = 955)
     def hasbackPain(self):
-        back_pain = input("\nDo you experience back pains?\nPlease type Yes/No\n")
-        self.declare(Fact(back_pain = back_pain.strip().lower()))
+        self.back_pain = input("\nDo you experience back pains?\nPlease type Yes/No\n")
+        self.declare(Fact(back_pain = self.back_pain.strip().lower()))
     
+    @Rule(Fact(findDisease='true'), NOT (Fact(sunken_eyes = W())),salience = 950)
+    def hasSunkenEyes(self):
+        self.sunken_eyes = input("\nDo you experience sunken eyes?\nPlease type Yes/No\n")
+        self.declare(Fact(sunken_eyes = self.sunken_eyes.strip().lower()))
+
+    @Rule(Fact(findDisease='true'), NOT (Fact(fever = W())),salience = 945)
+    def hasfever(self):
+        self.fever = input("\nDo you experience fever?\nPlease type Yes/No\n")
+        self.declare(Fact(fever = self.fever.strip().lower()))
+
+    @Rule(Fact(findDisease='true'), NOT (Fact(sore_throat = W())),salience = 940)
+    def hassorethroat(self):
+        self.sore_throat = input("\nDo you experience sore throat?\nPlease type Yes/No\n")
+        self.declare(Fact(sore_throat = self.sore_throat.strip().lower()))
 
 
+    @Rule(Fact(findDisease='true'), NOT (Fact(restlessness = W())),salience = 935)
+    def hasrestlessness(self):
+        self.restlessness = input("\nDo you experience restlessness?\nPlease type Yes/No\n")
+        self.declare(Fact(restlessness = self.restlessness.strip().lower()))
 
 
-
-
-
-    @Rule(Fact(findDisease='true'), Fact(severe_chestPain = 'yes'), Fact(cough='no'))
+    @Rule(Fact(findDisease='true'), Fact(chestPain = 'yes'), Fact(cough='no'))
     def disease_0(self):
         self.declare(Fact(disease = 'Covid'))
 
-
+    @Rule(Fact(findDisease='true'),salience = 1)
+    def unmatched(self):
+        self.declare(Fact(disease = 'unknown'))
 
     @Rule(Fact(findDisease = 'true'),Fact(disease = MATCH.disease),salience = -1)
     def getDisease(self, disease):
-        print('The most probable illness you are suffering from is:',disease)
-        print('\n\n')
-        print('Some info about the disease:\n')
         
-        f = open("disease/disease_descriptions/" + disease + ".txt", "r")
-        print(f.read())
+        if(disease == 'unknown'):
+            print(self.back_pain)
+            print('We are unable to tell you the exact disease with confidence.But we believe that')
 
-        print('\n\nNo need to worry',self.username,'. We even have some preventive measures for you!\n')
-        f = open("disease/disease_treatments/" + disease + ".txt", "r")
-        print(f.read())
+        else:
+            print('The most probable illness you are suffering from is:',disease)
+            print('\n\n')
+            print('Some info about the disease:\n')
+            
+            f = open("disease/disease_descriptions/" + disease + ".txt", "r")
+            print(f.read())
+
+            print('\n\nNo need to worry',self.username,'. We even have some preventive measures for you!\n')
+            f = open("disease/disease_treatments/" + disease + ".txt", "r")
+            print(f.read())
     # @Rule(Fact(findDisease = 'true'),
     # Fact(name=MATCH.name))
     # def greet(self, name):

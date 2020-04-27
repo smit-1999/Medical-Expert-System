@@ -1,0 +1,10 @@
+chest_pain
+cough
+fainting
+fatigue
+headache
+back_pain
+sunken_eyes
+fever
+sore_throat
+restlessness

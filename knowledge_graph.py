@@ -1,19 +1,32 @@
 import networkx as nx
 import matplotlib.pyplot as plt # For drawing
 from networkx.algorithms import bipartite
+import ast
+
+file = open("disease_symptoms.txt", "r")
+contents = file.read()
+dictionary = ast.literal_eval(contents)
+file.close()
 
 
-G=nx.Graph() # Create a graph
-G.add_nodes_from(['A','B','C'], bipartite = 0)
-G.add_nodes_from(['e','f'], bipartite=1)
-G.add_edges_from([('A','e'),('A','f'),('B','e'),('C','e')])
-# for target in dictionary.keys():
-#     G.add_edge(target, dictionary[target]) # Add an edge for each dictionary entry
-#                                            # Nodes are automatically created
+file = open("symptoms.txt","r")
+symptoms = file.read().split("\n")
+
+
+symptoms=symptoms[0:-2]
+G=nx.Graph()                    # Create a graph
+G.add_nodes_from(dictionary.keys(), bipartite = 0)
+G.add_nodes_from(symptoms, bipartite=1)
+for key in dictionary.keys():
+    u = key
+    val = dictionary[key]
+    val = val.split(",")
+    for v in val:
+        G.add_edge(u,v)
+
 
 X, Y = bipartite.sets(G)
-print('X: ',X)
-print('Y:',Y)
+
 pos=dict()
 pos.update( (n, (1, i)) for i, n in enumerate(X) )
 pos.update( (n, (2, i)) for i, n in enumerate(Y) )
@@ -26,6 +39,6 @@ for node in X:
 for node in Y:
     color_map.append('green')
 
-
+plt.title("Bipartite Knowledge Base")
 nx.draw(G,node_color=color_map, with_labels = True,pos=pos) # Draw the graph
 plt.savefig("graph.png") # Save to a PNG file
