@@ -24,6 +24,7 @@ class MedicalExpert(KnowledgeEngine):
     @Rule(Fact(findDisease='true'), NOT (Fact(chestPain = W())),salience = 995)
     def hasChestPain(self):
         self.chest_pain = input("\nDo you have chest pain?\nPlease type Yes/No\n")
+        self.chest_pain = self.chest_pain.lower()
         self.declare(Fact(chestPain = self.chest_pain.strip().lower()))
 
     # @Rule(Fact(findDisease='true'), (Fact(chestPain = 'yes')),salience = 990)
@@ -34,6 +35,7 @@ class MedicalExpert(KnowledgeEngine):
     @Rule(Fact(findDisease='true'), NOT (Fact(cough = W())),salience = 985)
     def hasCough(self):
         self.cough = input("\nDo you have cough?\nPlease type Yes/No\n")
+        self.cough = self.cough.lower()
         self.declare(Fact(cough = self.cough.strip().lower()))
 
     
@@ -46,6 +48,7 @@ class MedicalExpert(KnowledgeEngine):
     @Rule(Fact(findDisease='true'), NOT (Fact(fainting = W())),salience = 975)
     def hasFainting(self):
         self.fainting = input("\nDo you faint occasionally?\nPlease type Yes/No\n")
+        self.fainting = self.fainting.lower()
         self.declare(Fact(fainting = self.fainting.strip().lower()))
 
 
@@ -56,11 +59,13 @@ class MedicalExpert(KnowledgeEngine):
     @Rule(Fact(findDisease='true'), NOT (Fact(fatigue = W())),salience = 970)
     def hasFatigue(self):
         self.fatigue = input("\nDo you experience fatigue occasionally?\nPlease type Yes/No\n")
+        self.fatigue = self.fatigue.lower()
         self.declare(Fact(fatigue = self.fatigue.strip().lower()))
 
     @Rule(Fact(findDisease='true'), NOT (Fact(headache = W())),salience = 965)
     def hasHeadache(self):
         self.headache = input("\nDo you experience headaches?\nPlease type Yes/No\n")
+        self.headache = self.headache.lower()
         self.declare(Fact(headache = self.headache.strip().lower()))
     
     # @Rule(Fact(findDisease='true'), (Fact(headache = 'yes')),salience = 960)
@@ -71,27 +76,32 @@ class MedicalExpert(KnowledgeEngine):
     @Rule(Fact(findDisease='true'), NOT (Fact(back_pain = W())),salience = 955)
     def hasbackPain(self):
         self.back_pain = input("\nDo you experience back pains?\nPlease type Yes/No\n")
+        self.back_pain = self.back_pain.lower()
         self.declare(Fact(back_pain = self.back_pain.strip().lower()))
     
     @Rule(Fact(findDisease='true'), NOT (Fact(sunken_eyes = W())),salience = 950)
     def hasSunkenEyes(self):
         self.sunken_eyes = input("\nDo you experience sunken eyes?\nPlease type Yes/No\n")
+        self.sunken_eyes = self.sunken_eyes.lower()
         self.declare(Fact(sunken_eyes = self.sunken_eyes.strip().lower()))
 
     @Rule(Fact(findDisease='true'), NOT (Fact(fever = W())),salience = 945)
     def hasfever(self):
         self.fever = input("\nDo you experience fever?\nPlease type Yes/No\n")
+        self.fever=self.fever.lower()
         self.declare(Fact(fever = self.fever.strip().lower()))
 
     @Rule(Fact(findDisease='true'), NOT (Fact(sore_throat = W())),salience = 940)
     def hassorethroat(self):
         self.sore_throat = input("\nDo you experience sore throat?\nPlease type Yes/No\n")
+        self.sore_throat = self.sore_throat.lower()
         self.declare(Fact(sore_throat = self.sore_throat.strip().lower()))
 
 
     @Rule(Fact(findDisease='true'), NOT (Fact(restlessness = W())),salience = 935)
     def hasrestlessness(self):
         self.restlessness = input("\nDo you experience restlessness?\nPlease type Yes/No\n")
+        self.restlessness = self.restlessness.lower()
         self.declare(Fact(restlessness = self.restlessness.strip().lower()))
 
 
@@ -195,10 +205,11 @@ class MedicalExpert(KnowledgeEngine):
             mapDisease.append('sore_throat')
             mapDisease.append('restlessness')
             mapDisease.append('sunken_eyes') 
+            print('We checked the following symptoms',mapDisease)
             mapDisease_val=[self.back_pain,self.chest_pain,self.cough,self.fainting,self.fatigue
             ,self.fever,self.headache,self.sore_throat,self.restlessness,self.sunken_eyes]
+            print('Symptoms in patients are :', mapDisease_val)
             
-            print('We are unable to tell you the exact disease with confidence.But we believe that')
             file = open("disease_symptoms.txt", "r")
             contents = file.read()
             dictionary = ast.literal_eval(contents)
@@ -208,14 +219,17 @@ class MedicalExpert(KnowledgeEngine):
             for i in range(0,len(mapDisease_val)):
                 if mapDisease_val[i] == 'yes':
                     yes_symptoms.append(mapDisease[i])
+            
             max_val = -1
-        
+            print('Yes symptoms noticed are : ', yes_symptoms)
             for key in dictionary.keys():
                 val = dictionary[key].split(",")
                 count = 0
+                print(key,":",val)
                 for x in val:
                     if x in yes_symptoms:
                         count+=1
+                #print('Count:',count)
                 if count > max_val:
                     max_val = count
                     pred_dis = key
@@ -223,15 +237,28 @@ class MedicalExpert(KnowledgeEngine):
             if max_val == -1:
                 print("No diseases found.You are healthy!")
             else:
-                print(pred_dis)
+                print("We are unable to tell you the exact disease with confidence.But we believe that you suffer from",pred_dis)
+                
+                print('#############################################')
+
+                print ('\n\nSome info about the disease:',pred_dis)
+                
+                f = open("disease/disease_descriptions/" + pred_dis + ".txt", "r")
+                print(f.read())
+                print('#############################################')
+                print('\n\nNo need to worry',self.username,'. We even have some preventive measures for you!\n')
+                f = open("disease/disease_treatments/" + pred_dis + ".txt", "r")
+                print(f.read())
+                print('#############################################')
         else:
             print('The most probable illness you are suffering from is:',disease)
             print('\n\n')
+            print('#############################################')
             print('Some info about the disease:\n')
             print(disease)
             f = open("disease/disease_descriptions/" + disease + ".txt", "r")
             print(f.read())
-
+            print('#############################################')
             print('\n\nNo need to worry',self.username,'. We even have some preventive measures for you!\n')
             f = open("disease/disease_treatments/" + disease + ".txt", "r")
             print(f.read())
