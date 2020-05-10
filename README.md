@@ -19,6 +19,28 @@ available. A Diagnosis Expert System can help a great deal in
 identifying those diseases and describing methods of treatment
 to be carried out.
 
+## Installation
+
+Python3 needs to be installed in your system.
+
+For running the main file use:
+
+```bash
+$ python3 main.py
+```
+
+For installing _experta_:
+
+```bash
+$ sudo pip3 install experta
+```
+
+To build a knowledge graph:
+
+```
+$ python3 knowledge_graph.py
+```
+
 ## Authors
 
 [Smit Shah](https://github.com/smit-1999)
