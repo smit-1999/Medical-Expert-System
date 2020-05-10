@@ -3,15 +3,16 @@ import matplotlib.pyplot as plt # For drawing
 from networkx.algorithms import bipartite
 import ast
 
+print('Reading disease and its symptoms.')
 file = open("disease_symptoms.txt", "r")
 contents = file.read()
 dictionary = ast.literal_eval(contents)
 file.close()
 
-
+print('Now reading all distinct symptoms.')
 file = open("symptoms.txt","r")
 symptoms = file.read().split("\n")
-
+file.close()
 
 symptoms=symptoms[0:-2]
 G=nx.Graph()                    # Create a graph
@@ -25,7 +26,7 @@ for key in dictionary.keys():
     for v in val:
         G.add_edge(u,v)
 
-
+print('Graph nodes and edges created.')
 X, Y = bipartite.sets(G)
 
 pos=dict()
@@ -39,6 +40,7 @@ for node in X:
 
 for node in Y:
     color_map.append('green')
+
 
 plt.title("Bipartite Knowledge Base")
 nx.draw(G,node_color=color_map, with_labels = True,pos=pos) # Draw the graph

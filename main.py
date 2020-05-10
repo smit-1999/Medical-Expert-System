@@ -205,10 +205,10 @@ class MedicalExpert(KnowledgeEngine):
             mapDisease.append('sore_throat')
             mapDisease.append('restlessness')
             mapDisease.append('sunken_eyes') 
-            print('We checked the following symptoms',mapDisease)
+            print('\n\nWe checked the following symptoms',mapDisease)
             mapDisease_val=[self.back_pain,self.chest_pain,self.cough,self.fainting,self.fatigue
             ,self.fever,self.headache,self.sore_throat,self.restlessness,self.sunken_eyes]
-            print('Symptoms in patients are :', mapDisease_val)
+            print('\n\nSymptoms in patients are :', mapDisease_val)
             
             file = open("disease_symptoms.txt", "r")
             contents = file.read()
@@ -220,8 +220,8 @@ class MedicalExpert(KnowledgeEngine):
                 if mapDisease_val[i] == 'yes':
                     yes_symptoms.append(mapDisease[i])
             
-            max_val = -1
-            print('Yes symptoms noticed are : ', yes_symptoms)
+            max_val = 0
+            print('\n\nYes symptoms noticed are : ', yes_symptoms)
             for key in dictionary.keys():
                 val = dictionary[key].split(",")
                 count = 0
@@ -234,31 +234,31 @@ class MedicalExpert(KnowledgeEngine):
                     max_val = count
                     pred_dis = key
             
-            if max_val == -1:
+            if max_val == 0:
                 print("No diseases found.You are healthy!")
             else:
-                print("We are unable to tell you the exact disease with confidence.But we believe that you suffer from",pred_dis)
+                print("\n\nWe are unable to tell you the exact disease with confidence.But we believe that you suffer from",pred_dis)
                 
-                print('#############################################')
+                print('\n# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #')
 
                 print ('\n\nSome info about the disease:',pred_dis)
                 
                 f = open("disease/disease_descriptions/" + pred_dis + ".txt", "r")
                 print(f.read())
-                print('#############################################')
+                print('# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #')
                 print('\n\nNo need to worry',self.username,'. We even have some preventive measures for you!\n')
                 f = open("disease/disease_treatments/" + pred_dis + ".txt", "r")
                 print(f.read())
-                print('#############################################')
+                print('\n# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #')
         else:
             print('The most probable illness you are suffering from is:',disease)
             print('\n\n')
-            print('#############################################')
+            print('\n# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #')
             print('Some info about the disease:\n')
             print(disease)
             f = open("disease/disease_descriptions/" + disease + ".txt", "r")
             print(f.read())
-            print('#############################################')
+            print('\n# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #')
             print('\n\nNo need to worry',self.username,'. We even have some preventive measures for you!\n')
             f = open("disease/disease_treatments/" + disease + ".txt", "r")
             print(f.read())
