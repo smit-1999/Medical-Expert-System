@@ -41,7 +41,8 @@ for node in X:
 for node in Y:
     color_map.append('green')
 
-
+print(X)
+print(Y)
 plt.title("Bipartite Knowledge Base")
 nx.draw(G,node_color=color_map, with_labels = True,pos=pos) # Draw the graph
 plt.savefig("graph.png") # Save to a PNG file
