@@ -3,7 +3,7 @@
 
 1. Fork this repository in your account.
 2. Clone it on your local machine.
-3. Add a new remote using `git remote add upstream https://github.com/smit-1999/AIML_Bot.git`.
+3. Add a new remote using `git remote add upstream https://github.com/smit-1999/Medical-Expert-System.git`.
 4. Create a new feature branch with `git checkout -b my-feature`.
 5. Make your changes.
 6. Commit your changes.
