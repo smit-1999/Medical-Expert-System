@@ -1,5 +1,10 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=smit-1999_Medical-Expert-System&metric=alert_status)](https://sonarcloud.io/dashboard?id=smit-1999_Medical-Expert-System)
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=smit-1999_Medical-Expert-System)](https://sonarcloud.io/dashboard?id=smit-1999_Medical-Expert-System)
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=smit-1999_Medical-Expert-System)
 # Table of Contents
+  * [Demo](#demo)
   * [Summary](#summary)
   * [Installation](#installation)
   * [Authors](#authors)
@@ -7,9 +12,15 @@
   * [References](#references)
 
 ## Demo
-![Questions](media/questions.png)
-![DiseaseInformation](media/info.png)
-![DiseaseSolution](media/solutions.png)
+
+*Questions asked to the bot*
+![Questions](media/questions.png "Questions")
+
+*Information of the disease provided*
+![DiseaseInformation](media/info.png "Information")
+
+*Preventive Measures suggested by the bot*
+![DiseaseSolution](media/solutions.png "Prevenive Measures")
 
 ## Summary
 
