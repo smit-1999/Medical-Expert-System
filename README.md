@@ -6,6 +6,11 @@
   * [Contribution](#contribution)
   * [References](#references)
 
+## Demo
+![Questions](media/questions.png)
+![DiseaseInformation](media/info.png)
+![DiseaseSolution](media/solutions.png)
+
 ## Summary
 
 Typical expert systems use knowledge to reason about input data and produce meaningful results. This knowledge mostly consisted of simple if-then rules, like if temperature sensor values are > 100C then turn off the electric kettle. 
